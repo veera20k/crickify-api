@@ -15,7 +15,7 @@ export class MatchController {
     }
 
     @Get('playing11/:matchId/:seriesId')
-   async getPlayingEleven(@Param('matchId') matchId: string, @Param('seriesId') seriesId: string) {
+    async getPlayingEleven(@Param('matchId') matchId: string, @Param('seriesId') seriesId: string) {
         const matchDetails = await this.matchService.getMatch(matchId, seriesId);
         return matchDetails.matchSquads || {};
     }
