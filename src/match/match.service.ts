@@ -63,7 +63,7 @@ export class MatchService {
   }
   
 
- async getMatch(matchId: string, seriesId: string): Promise<MatchDetails> {
+  async getMatch(matchId: string, seriesId: string): Promise<MatchDetails> {
     const response = await fetch(`${process.env.ESPN_API_URL}match/details?matchId=${matchId}&seriesId=${seriesId}&lang=en&latest=true`);
     if (!response.ok) {
       throw new ApiError(`Failed to scrap data from the API. Status: ${response.status}`, response.status);
@@ -77,6 +77,15 @@ export class MatchService {
       throw new ApiError(`Failed to scrap data from the API. Status: ${response.status}`, response.status);
     }
     return await response.json();
+  }
+
+  async getPlayingEleven(matchId: string, seriesId: string): Promise<unknown> {
+    const response = await fetch(`${process.env.ESPN_API_URL}match/team-players?matchId=${matchId}&seriesId=${seriesId}&lang=en`);
+    if (!response.ok) {
+      throw new ApiError(`Failed to scrap data from the API. Status: ${response.status}`, response.status);
+    }
+    const data: { content: { matchPlayers: { teamPlayers: unknown[] } } } = await response.json();
+    return data?.content?.matchPlayers?.teamPlayers || [];
   }
 
 }

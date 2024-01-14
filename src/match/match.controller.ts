@@ -14,15 +14,14 @@ export class MatchController {
         return this.matchService.getMatch(id, seriesId);
     }
 
-    @Get('playing11/:matchId/:seriesId')
-    async getPlayingEleven(@Param('matchId') matchId: string, @Param('seriesId') seriesId: string) {
-        const matchDetails = await this.matchService.getMatch(matchId, seriesId);
-        return matchDetails.matchSquads || {};
-    }
-
     @Get('ground/:matchId/:seriesId')
     getGround(@Param('groundId') groundId: string) {
         return this.matchService.getGround(groundId);
+    }
+
+    @Get('playingEleven/:matchId/:seriesId')
+    getPlayingEleven(@Param('matchId') matchId: string, @Param('seriesId') seriesId: string) {
+        return this.matchService.getPlayingEleven(matchId, seriesId);
     }
 
 }
