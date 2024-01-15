@@ -32,15 +32,12 @@ export class MatchService {
       series: match.series,
       badgeColor: getRandomColor(match.id),
     }));
-    // const categorizeMatches = (matches: any[], isCountry: boolean) => {
-    //   return matches.filter(match => match.teams.some(team => team.team.isCountry) === isCountry);
-    // };
-
+  
     const forYou = [];
     const others = [];
 
     transformedMatches.forEach(match => {
-      if (match.teams.every(team => team?.team?.isCountry || team?.team?.country.name === 'India')) {
+      if (match.teams.every(team => team?.team?.isCountry || team?.team?.country?.name === 'India')) {
         forYou.push(match);
       } else {
         others.push(match);
