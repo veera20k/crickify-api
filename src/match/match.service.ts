@@ -37,7 +37,7 @@ export class MatchService {
     const others = [];
 
     transformedMatches.forEach(match => {
-      if (match.teams.every(team => team?.team?.isCountry)) {
+      if (match.teams.every(team => team?.team?.isCountry || team?.team?.country?.name === 'India')) {
         forYou.push(match);
       } else {
         others.push(match);
